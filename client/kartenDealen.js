@@ -3,15 +3,33 @@ import { imgIdOmaha, imgIdTexas } from "./tischLayout.js";
 
 let localDeck = Array.from(deck);
 let reducedLocalDeck = [];
-let anzahl = 0;
+let board = [];
+let flop = [];
+let turn = [];
+let river = [];
 let holeCards = [];
 
-export function neuesBoard() {
-  let board = [];
-  let i = 5;
+// let anzahl = 0;
 
-  if (reducedLocalDeck.length === 0) {
-    reducedLocalDeck = localDeck;
+export function neuesBoard() {
+  let i = 5;
+  board = [];
+  flop = [];
+
+  reducedLocalDeck = Array.from(deck);
+
+  if (holeCards.length) {
+    reducedLocalDeck = reducedLocalDeck.filter(
+      (item) => !holeCards.includes(item)
+    );
+  }
+
+  if (turn.length) {
+    reducedLocalDeck = reducedLocalDeck.filter((item) => !turn.includes(item));
+  }
+
+  if (river.length) {
+    reducedLocalDeck = reducedLocalDeck.filter((item) => !river.includes(item));
   }
 
   while (i--) {
@@ -20,48 +38,80 @@ export function neuesBoard() {
     reducedLocalDeck.splice(zz, 1);
   }
 
+  console.log("", reducedLocalDeck.length);
   document.getElementById(
     "restKarten"
   ).innerHTML = `Restkarten ${reducedLocalDeck.length}`;
-  // reducedLocalDeck = localDeck;
 
-  localDeck = Array.from(deck);
+  // reducedLocalDeck = reducedLocalDeck.concat(board);
 
   return board;
 }
 
 export function neuerFlop() {
-  let flop = [];
   let i = 3;
+  flop = [];
+  board = [];
+  reducedLocalDeck = Array.from(deck);
 
-  while (i--) {
-    let zz = Math.floor(Math.random() * localDeck.length);
-    flop.push(localDeck[zz]);
-    localDeck.splice(zz, 1);
+  if (holeCards.length) {
+    reducedLocalDeck = reducedLocalDeck.filter(
+      (item) => !holeCards.includes(item)
+    );
   }
 
-  document.getElementById(
-    "restKarten"
-  ).innerHTML = `Restkarten ${localDeck.length}`;
-  reducedLocalDeck = localDeck;
+  if (turn.length) {
+    reducedLocalDeck = reducedLocalDeck.filter((item) => !turn.includes(item));
+  }
 
-  localDeck = Array.from(deck);
-  return flop;
-}
-
-export function neuerTurn() {
-  let turn = [];
-  let i = 1;
-
-  if (reducedLocalDeck.length === 0) {
-    reducedLocalDeck = localDeck;
+  if (river.length) {
+    reducedLocalDeck = reducedLocalDeck.filter((item) => !river.includes(item));
   }
 
   while (i--) {
     let zz = Math.floor(Math.random() * reducedLocalDeck.length);
-    turn.push(localDeck[zz]);
+    flop.push(reducedLocalDeck[zz]);
     reducedLocalDeck.splice(zz, 1);
   }
+
+  document.getElementById(
+    "restKarten"
+  ).innerHTML = `Restkarten ${reducedLocalDeck.length}`;
+
+  reducedLocalDeck = reducedLocalDeck.concat(flop);
+  return flop;
+}
+
+export function neuerTurn() {
+  let i = 1;
+  turn = [];
+
+  reducedLocalDeck = Array.from(deck);
+
+  if (holeCards.length) {
+    reducedLocalDeck = reducedLocalDeck.filter(
+      (item) => !holeCards.includes(item)
+    );
+  }
+
+  if (board.length) {
+    reducedLocalDeck = reducedLocalDeck.filter((item) => !board.includes(item));
+  }
+
+  if (flop.length) {
+    reducedLocalDeck = reducedLocalDeck.filter((item) => !flop.includes(item));
+  }
+
+  if (river.length && !board.length) {
+    reducedLocalDeck = reducedLocalDeck.filter((item) => !river.includes(item));
+  }
+
+  while (i--) {
+    let zz = Math.floor(Math.random() * reducedLocalDeck.length);
+    turn.push(reducedLocalDeck[zz]);
+    // reducedLocalDeck.splice(zz, 1);
+  }
+
   checkIfCardsAreAvailable();
   document.getElementById(
     "restKarten"
@@ -71,17 +121,33 @@ export function neuerTurn() {
 }
 
 export function neuerRiver() {
-  let river = [];
   let i = 1;
+  river = [];
 
-  if (reducedLocalDeck.length === 0) {
-    reducedLocalDeck = localDeck;
+  reducedLocalDeck = Array.from(deck);
+
+  if (holeCards.length) {
+    reducedLocalDeck = reducedLocalDeck.filter(
+      (item) => !holeCards.includes(item)
+    );
+  }
+
+  if (board.length) {
+    reducedLocalDeck = reducedLocalDeck.filter((item) => !board.includes(item));
+  }
+
+  if (flop.length) {
+    reducedLocalDeck = reducedLocalDeck.filter((item) => !flop.includes(item));
+  }
+
+  if (turn.length && !board.length) {
+    reducedLocalDeck = reducedLocalDeck.filter((item) => !turn.includes(item));
   }
 
   while (i--) {
     let zz = Math.floor(Math.random() * reducedLocalDeck.length);
     river.push(reducedLocalDeck[zz]);
-    reducedLocalDeck.splice(zz, 1);
+    // reducedLocalDeck.splice(zz, 1);
   }
 
   checkIfCardsAreAvailable();
@@ -93,6 +159,9 @@ export function neuerRiver() {
 }
 
 export function createHoleCards(anzahlSpieler, statusSpielVariante) {
+  console.log("red", reducedLocalDeck.length);
+  holeCards = [];
+
   if (statusSpielVariante === "") {
     alert("Bitte Spiel Texas oder Omaha wählen");
     return;
@@ -104,7 +173,7 @@ export function createHoleCards(anzahlSpieler, statusSpielVariante) {
 
   // console.log("reducedLocalDeck", reducedLocalDeck);
 
-  console.log("localDeck", localDeck);
+  // console.log("localDeck", localDeck);
 
   let anzahlKartenFuerSpielvariante;
 
@@ -120,11 +189,14 @@ export function createHoleCards(anzahlSpieler, statusSpielVariante) {
     reducedLocalDeck.splice(zz, 1);
   }
 
+  console.log("red", reducedLocalDeck.length);
   document.getElementById(
     "restKarten"
   ).innerHTML = `Restkarten ${reducedLocalDeck.length}`;
+  console.log("red", reducedLocalDeck.length);
 
   reducedLocalDeck = reducedLocalDeck.concat(holeCards);
+  console.log("red", reducedLocalDeck.length);
 
   console.log("holeCards", holeCards);
 
@@ -133,7 +205,6 @@ export function createHoleCards(anzahlSpieler, statusSpielVariante) {
 
     imgIdOmaha.forEach((element) => {
       let img = document.getElementById(element);
-      console.log("", img);
       img.src = `../cards/${holeCards[anzahlHoleCards]}.png`;
       anzahlHoleCards++;
     });
@@ -147,11 +218,9 @@ export function createHoleCards(anzahlSpieler, statusSpielVariante) {
     });
   }
 
-  holeCards = [];
-
   checkIfCardsAreAvailable();
 
-  return;
+  return holeCards;
 }
 
 function checkIfCardsAreAvailable() {
