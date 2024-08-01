@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="module" src="./main.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="id-nav">
+      <div>
+        <button id="texas" onclick="tischLayout('texas')">TEXAS</button>
+        <button id="omaha" onclick="tischLayout('omaha')">OMAHA</button>
+        <div style="margin: 0, 5px; display: inline">
+          <span>***</span>
+        </div>
+        <button id="btn-neuesBoard">NEUES BOARD</button>
+        <button id="btn-neuerFlop">NEUER FLOP</button>
+        <button id="btn-turn">TURN</button>
+        <button id="btn-river">RIVER</button>
+
+        <div style="display: inline; margin: 0, 5px">
+          <span>***</span>
+        </div>
+        <p id="restKarten" style="margin: 0">Restkarten 52</p>
+      </div>
+      <div>
+        <button id="btn-holeCards">playersHoleCards</button>
+        <div style="display: inline; margin: 0, 5px">
+          <span>***</span>
+        </div>
+        <label
+          >How many Player
+          <input
+            type="number"
+            id="countPlayers"
+            min="1"
+            max="9"
+            step="1"
+            value="4"
+          />
+        </label>
+      </div>
+    </div>
+
+    <div id="id-alle-karten"></div>
+    <div id="id-board">
+      <img class="flop" src="../cards/blank.png" alt="" />
+      <img class="flop" src="../cards/blank.png" alt="" style="margin: 0 5px" />
+      <img class="flop" src="../cards/blank.png" alt="" />
+      <img id="turn" src="../cards/blank.png" alt="" style="margin: 0 20px" />
+      <img id="river" src="../cards/blank.png" alt="" />
+    </div>
+
+    <div id="id-ply"></div>
+  </body>
+</html>

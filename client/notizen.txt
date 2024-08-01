@@ -1,0 +1,4 @@
+toDo 
+
+
+falls holeCards vorhanden sind mus dass beim neuen (Board, Flop, Turn, River) berücksichtigt wereden 

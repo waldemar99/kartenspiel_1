@@ -1,0 +1,64 @@
+#id-alle-karten {
+  display: ruby;
+}
+
+img {
+  border: solid;
+  width: 15%;
+}
+
+.cl-alle-karten-img-wrapper {
+  width: 30px;
+  height: 50px;
+  overflow: hidden;
+
+  /* display: none; */
+}
+
+.cl-alle-karten-img {
+  width: 200px;
+}
+
+/* #id-ply img {
+  width: 30%;
+} */
+
+#id-ply {
+  display: flex;
+}
+
+#id-board {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#id-nav {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.cl-ply-auto {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+#id-ply img {
+  width: 110px;
+  margin: 3px;
+}
+
+#id-board img {
+  width: 110px;
+}
+
+input {
+  width: 90px;
+}
+
+#restKarten {
+  position: relative;
+  top: 100px;
+  left: 160%;
+}
