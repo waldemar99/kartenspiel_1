@@ -10,18 +10,20 @@ export function neuesBoard() {
   let board = [];
   let i = 5;
 
-  // console.log("", localDeck);
+  if (reducedLocalDeck.length === 0) {
+    reducedLocalDeck = localDeck;
+  }
 
   while (i--) {
-    let zz = Math.floor(Math.random() * localDeck.length);
-    board.push(localDeck[zz]);
-    localDeck.splice(zz, 1);
+    let zz = Math.floor(Math.random() * reducedLocalDeck.length);
+    board.push(reducedLocalDeck[zz]);
+    reducedLocalDeck.splice(zz, 1);
   }
 
   document.getElementById(
     "restKarten"
-  ).innerHTML = `Restkarten ${localDeck.length}`;
-  reducedLocalDeck = localDeck;
+  ).innerHTML = `Restkarten ${reducedLocalDeck.length}`;
+  // reducedLocalDeck = localDeck;
 
   localDeck = Array.from(deck);
 
