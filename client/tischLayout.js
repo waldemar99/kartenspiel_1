@@ -36,7 +36,7 @@ function tischLayout(spielVariante) {
         divWrapperElementCards.className = "cl-span-wrapper-cards";
 
         const img = new Image();
-        img.src = "../cards/blank.png";
+        img.src = "./cards/blank.png";
         img.id = `id-img-${spieler[anzahlSpieler]}-${i}`;
         imgIdOmaha.push(img.id);
 
@@ -71,7 +71,7 @@ function tischLayout(spielVariante) {
         divWrapperElementCards.className = "cl-span-wrapper-cards";
 
         const img = new Image();
-        img.src = "../cards/blank.png";
+        img.src = "./cards/blank.png";
         img.id = `id-img-${spieler[anzahlSpieler]}-${i}`;
         imgIdTexas.push(img.id);
 

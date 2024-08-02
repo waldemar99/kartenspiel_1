@@ -205,7 +205,7 @@ export function createHoleCards(anzahlSpieler, statusSpielVariante) {
 
     imgIdOmaha.forEach((element) => {
       let img = document.getElementById(element);
-      img.src = `../cards/${holeCards[anzahlHoleCards]}.png`;
+      img.src = `./cards/${holeCards[anzahlHoleCards]}.png`;
       anzahlHoleCards++;
     });
   } else {
@@ -213,7 +213,7 @@ export function createHoleCards(anzahlSpieler, statusSpielVariante) {
     imgIdTexas.forEach((element) => {
       let img = document.getElementById(element);
       console.log("", img);
-      img.src = `../cards/${holeCards[anzahlHoleCards]}.png`;
+      img.src = `./cards/${holeCards[anzahlHoleCards]}.png`;
       anzahlHoleCards++;
     });
   }

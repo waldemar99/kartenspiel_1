@@ -12,7 +12,7 @@ export function alleKartenDarstellen() {
     alleKarten.appendChild(cardWrapper); // append the div to the wrapper
 
     const cardImage = new Image(); // create a new image
-    cardImage.src = `../cards/${deck[i]}.png`; // set the image source
+    cardImage.src = `./cards/${deck[i]}.png`; // set the image source
     cardImage.classList.add("cl-alle-karten-img"); // add class to the image
     cardImage.id = `id-alle-karten-img-${i}`;
 
